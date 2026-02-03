@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question 🌹</title>
+    <style>
+        :root {
+            --rose-red: #d90429;
+            --soft-pink: #ffafcc;
+        }
+
+        body {
+            background-color: #fff0f3;
+            background-image: radial-gradient(#ffccd5 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Flower decorations */
+        .corner-flower {
+            position: fixed;
+            font-size: 80px;
+            z-index: 10;
+        }
+        .top-left { top: -10px; left: -10px; transform: rotate(-15deg); }
+        .bottom-right { bottom: -10px; right: -10px; transform: rotate(165deg); }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(217, 4, 41, 0.2);
+            border: 2px solid var(--soft-pink);
+            z-index: 20;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 { color: var(--rose-red); font-size: 2.2rem; margin-bottom: 10px; }
+        p { color: #444; font-size: 1.1rem; line-height: 1.5; }
+
+        .btn-group {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 50px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: var(--rose-red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(217, 4, 41, 0.3);
+        }
+
+        #yesBtn:hover { transform: scale(1.1); background-color: #ef233c; }
+
+        #noBtn {
+            background-color: #8d99ae;
+            color: white;
+            position: relative;
+        }
+
+        /* Floating Rose Animation */
+        .rose-petal {
+            position: fixed;
+            top: -10%;
+            z-index: 1;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="corner-flower top-left">🌹</div>
+    <div class="corner-flower bottom-right">🌹</div>
+
+    <div class="container" id="mainCard">
+        <div style="font-size: 50px;">🌹</div>
+        <h1>Hey Gorgeous,</h1>
+        <p>You make every day feel like spring. I have a very important question...</p>
+        <p><strong>Will you be my Valentine?</strong></p>
+        
+        <div class="btn-group">
+            <button id="yesBtn" onclick="celebrate()">YES! 🌹</button>
+            <button id="noBtn" onmouseover="dodge()">No</button>
+        </div>
+    </div>
+
+    <script>
+        // Create falling roses
+        function createRose() {
+            const rose = document.createElement('div');
+            rose.innerHTML = '🌹';
+            rose.classList.add('rose-petal');
+            rose.style.left = Math.random() * 100 + 'vw';
+            rose.style.animationDuration = Math.random() * 3 + 2 + 's';
+            rose.style.opacity = Math.random();
+            rose.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.body.appendChild(rose);
+
+            setTimeout(() => { rose.remove(); }, 5000);
+        }
+
+        setInterval(createRose, 300);
+
+        function dodge() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            const card = document.getElementById('mainCard');
+            card.innerHTML = `
+                <div style="font-size: 60px;">❤️🌹❤️</div>
+                <h1>I Knew You'd Say Yes!</h1>
+                <p>You've made me the happiest person in the world.</p>
+                <p>Get ready for the best Valentine's Day ever! ✨</p>
+                <div style="margin-top:20px; color:var(--rose-red); font-weight:bold;">I Love You!</div>
+            `;
+            // Add extra explosion of roses
+            for(let i=0; i<50; i++) {
+                setTimeout(createRose, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
+
